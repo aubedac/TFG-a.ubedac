@@ -1,0 +1,165 @@
+\chapter{Marco teórico}
+\label{cap:marco_teorico}
+	En este capítulo se explicarán de manera resumida los conceptos y tecnologías más importantes relacionadas con el desarrollo del proyecto, así como una breve introducción a la monitorización de redes.\\\\
+	
+	A continuación, se describirán las soluciones y propuestas empleadas para resolver el problema sobre la red de transporte. Así mismo, se explicarán los estándares y protocolos utilizados y más destacados. En concreto se hablará de las tecnologías inalámbricas: WiFi tanto para cortas distancias como para larga distancia (WiLD), WiMAX, LTE, \textit{Television White Spaces} (TVWS) y los protocolos propietarios de Mikrotik \cite{Mikrotik} Nstreme y NV2.\\
+	De igual forma se detallará la legislación y normativa vigente en el marco del proyecto respecto al uso y despliegue de dichas tecnologías, acorde con el artículo \cite{espinoza2018wireless}.\\\\
+	
+	Por último, se analizarán diferentes programas software de monitorización y gestión de redes que es razonable utilizar en este proyecto, estableciendo una comparativa entre ellos. Del mismo modo, se comentará de manera más detallada el funcionamiento y características de la herramienta escogida como solución para el desarrollo del proyecto.
+	
+\section{Red de transporte en redes inalámbricas para zonas rurales}
+	Como ya se ha comentado, la extensión de la cobertura de redes de telecomunicaciones en zonas rurales tropieza con el hándicap del elevado coste de despliegue de las infraestructuras necesarias frente a una expectativa de bajo retorno de la inversión, debido a la escasa densidad de población de estas zonas; este problema es mayor cuanto menor es la densidad de población, mayor la distancia focos de concentración, y menor el poder adquisitivo de la población. Por tanto, existe la necesidad de soluciones flexibles y de bajo coste para tratar de resolver dicho problema.\\\\
+	
+	En lo que respecta a redes de acceso radio a comunicaciones móviles de banda ancha, una solución que se ha aplicado en algunos proyectos, como es el caso del TUCAN3G, es el uso de de femtoceldas. Las femtoceldas son estaciones base diseñadas para servir a un reducido número de usuarios concurrentes y con una potencia de transmisión también muy pequeña, y se asume que usan como backhaul un enlace de acceso a Internet preexistente; en un principio estaban diseñadas para cubrir los huecos de cobertura existentes en determinadas zonas, por lo cual muchas de ellas están alojadas dentro de edificios. Lo que hace de las femtoceldas una solución viable es su escaso consumo energético y su flexibilidad. Esto aporta una solución más viable para el operador de telefonía frente al uso de nodos convencionales: la inversión es menor obteniendo un redimiento equitativo.\\\\
+	
+	Por otra parte, para transportar el tráfico intercambiado entre estas redes de acceso y la red fija de transporte del operador, hace falta también una solución igualmente apropiada para el transporte rural. Se requieren tecnologías de muy bajo costo y flexibles para que al operador le traiga cuenta desplegar tal infraestructura, o incluso compartirla con otros agentes socioeconómicos. A continuación se procede a explicar brevemente el funcionamiento de las distintas tecnologías pertenecientes al ámbito de comunicaciones inalámbricas para enlaces de larga distancia, obteniendo así diferentes rendimientos de la solución propuesta.
+
+
+\section{Protocolos Inalámbricos}
+
+		\subsection{Nstreme}
+		El protocolo Nstreme es un protocolo inalámbrico, que posteriormente daría lugar al protocolo NV2, que utiliza Polling como protocolo de acceso al medio correspondiente a la capa MAC. El funcionamiento del protocolo viene ilustrado en la imagen \ref{Nstreme} como protocolo de acceso al medio correspondiente de la capa MAC. Siguiendo este protocolo, la comunicación entre estaciones base se produce de manera independiente a la comunicación con los nodos cliente. La comunicación entre clientes y estaciones base se realiza utilizando mensajes de señalización, o tokens, con los que las estaciones base conocen el comienzo y final de la transmisión. Si la estación base considera que un nodo cliente no está emitiendo pasaría a inspeccionar otro nodo de la red.    
+	
+		\begin{figure}[H]
+			\centering
+			\includegraphics[width=0.7\textwidth]{img/Polling.png}
+			\caption{Funcionamiento \textit{Polling} en Nstreme}
+			\label{Nstreme}
+		\end{figure}
+		
+		Acorde con esto, las ventajas e incovenientes del protocolo son:
+		\begin{itemize}
+			\item No existen limitaciones entre estación base y cliente.
+			\item Baja sobrecarga de cabeceras en las tramas por lo que permite conseguir mayores tasas de envío.
+			\item Retardo por propagación y latencia como consecuencia de usar \textit{Polling}.
+		\end{itemize}
+
+		\subsection{NV2}
+		El protocolo NV2 es un protocolo inalámbrico, perteneciente a la capa MAC \cite{MacLayer}, basado en el acceso múltiple por división de tiempo (TDMA) en lugar de \textit{Polling} o acceso múltiple con escucha de señal portadora (CSMA). Este último es el usado más comúnmente por la mayoría de equipos relacionados con el estándar 802.11.\\\\
+		
+		Para explicar el funcionamiento del protocolo NV2, mostrado en la figura \ref{NV2}, vamos a suponer un escenario en el cuál nuestra red estará compuesta por una estación base (BS), la cuál está utilizando el protocolo NV2, y diferentes clientes que comparten BS. El acceso al medio de los clientes estará organizado por la BS, que dividirá el tiempo en períodos. Estos períodos estarán dinamicamente divididos en porciones para \textit{Downlink} (datos enviados desde la BS hacía el cliente) y \textit{Uplink} (datos enviados desde el cliente a la BS). Al comienzo de cada período, la BS mandará un mensaje mediante \textit{broadcast} a los clientes con información sobre en qué momento han de transmitir y del tiempo disponible para ello. \\
+		Acorde con lo anterior, la BS de manera periódica asigna una parte del tiempo de Uplink para un ''cliente desconocido''. Dicho tiempo tiene como objetivo favorecer la integración y comunicación de un nuevo cliente con la red (si lo hubiera). Para ello, la BS estima el retardo que existe entre la misma y el nuevo cliente reajustando el tiempo de Uplink, permitiendo completar el registro y comunicación del nuevo cliente con la red.
+		
+		\begin{figure}[H]
+			\centering
+			\includegraphics[width=0.7\textwidth]{img/TDMA.png}
+			\caption{Funcionamiento TDMA en NV2}
+			\label{NV2}
+		\end{figure}
+		
+		Las ventajas e inconvenientes del protocolo NV2 se detallan a continuación:
+		\begin{itemize}
+			\item Mejor rendimiento en redes punto a punto (PTP).
+			\item Mayor \textit{throughput} y menor latencia.
+			\item No existe el problema del nodo oculto.
+			\item Únicamente se podrán establecer redes homogéneas al protocolo NV2, en consecuencia podrá existir interferencia entre redes que no usen NV2 y viceversa.
+		\end{itemize}
+		
+\section{Tecnologías Inalámbricas}
+Antes de comenzar con el análisis sobre las diferentes tecnologías inalámbricas estudiadas en el marco del proyecto,  debemos de tener en cuenta todas la limitaciones existentes en el proyecto Napo. Esto implica, no sólo el coste e inversión económica que ha de hacerse para desarrollar una infraestructura de telecomuniaciones viable, si no que también debemos tener en cuenta las normas y legislaciones existentes en cuanto al uso del espectro radioeléctrico peruano.\\\\
+
+Durante las últimas décadas, las telecomunicaciones en toda sudámerica y en especial en áreas rurales han sufrido fuertes barreras y obstáculos frente a la implantación de un modelo de desarrollo sostenible. Como resultado de esto, el empobrecimiento de la población y pérdida de calidad de vida fue en aumento. La vida social en zonas rurales se distanció aún más de la existente en las urbes, provocando así el aumento de ausentismo escolar y tasa de mortalidad. Para tratar de combatir esto, desde varios gobiernos sudamericanos se promovió la importancia de trazar nuevos caminos y estructuras para tratar de apaliar el déficit existente en dichas zonas rurales.\\\\
+
+Como cosecuencia de esto, en 2005 el ministerio peruano de transporte y comunicaciones (CTM), aprobó una nueva ley sobre el uso del espectro radioeléctrico a nivel nacional. Con el objetivo de utilizar dicho espectro de forma más eficiente y promover el despliegue de nuevas redes inalámbricas, se redefinieron los usos y asignaciones de las bandas disponibles en el espectro, tratando de satisfacer así la fuerte demanda creciente en cuanto a servicios TIC. \\\\
+
+El objetivo final de invertir en una ampliación de la infraestructura de telecomunicaciones ya existente era ofrecer servicios mínimos de acceso público a instituciones públicas, como por ejemplo escuelas, puestos de salud, comisarías, etc... Para tratar de llevar a cabo dicha labor se escogió las tecnologías inalámbricas como solución a dicho problema, ya que permiten una mayor flexibilidad, requieren una inversión inicial de capital menor meintras que su despliegue y desarrollo es más rápido, y por último son tecnologías más eficientes en términos de operación y gestión de redes.\\\\
+
+A continuación, analizaremos el espectro readioeléctrico en el contexto peruano, así como el uso, aplicación y evolución de las diferentes tecnologías que han sido objeto de estudio durante la realización de este Trabajo Fin de Grado.
+
+\subsection{WiFi}
+La tecnología WiFi se basa en el estándar IEEE 802.11, que fue diseñado para uso en zonas urbanas o metropolitanas. Está pensado para funcionar en bandas de frecuencias no licenciadas de 2.4 GHz o 5 GHz. WiFi utiliza el protocolo CSMA/CA para acceder al medio, lo que implica que no sea del todo satisfactorio en el ámbito de comunicaciones inalámbricas de largo alcance, ya que los tiempos de silencio en el canal necesarios para esta clase de control de acceso al medio se hacen insuficientes para evitar las colisiones o, si se agrandan fuera de lo que marca el estándar, tienen un alto impacto en la eficiencia. No obstante, esto no hace que el uso de WiFi se deseche por completo ya que, realizando un pequeño ajusta al funcionamiento del protocolo de acceso al medio y asegurando una linea de visión directa entre los enlaces conseguiremos una solución viable en nuestro contexto.\\\\
+		
+WiFi es usado principalmente en canales cuyo ancho de banda se corresponde a 20 MHz. Sin embargo, su uso para canales de 5 y 10 MHz es también posible desde las primeras versiones del estándar, y a partir de la revisión IEEE 802.11n es también posible emplear canales de 40 MHz. Adicionalmente, desde IEEE 802.11n la transmisión y recepción de señal existiendo diversidad espacial es posible, ya que la mayoría de equipos están diseñados con antenas duales MIMO 2x2. Otra característica que ofrece WiFi es su funcionamiento respecto a la agregación de tramas, ya que podemos crear una trama de mayor tamaño manteniendo una única cabecera y siendo capaces de establecer una diferenciación en el tráfico. \\\\
+		
+Aunque el estándar ofrece mejoras en la capa física, tendremos que tener en cuenta otros parámetros como la potencia de señal recibida (SNR), la modulación y códigos utilizados para obtener una tasa de transmisión óptima en nuestra red. Teniendo en cuenta todo esto, WiFi podría ser una solución viable y sostenible en el marco de nuestro proyecto. Sin embargo, debemos tener en cuenta el rendimiento que ofrece el estándar frente al canal utilizado y su gestión de acceso al medio. Del mismo modo, hay que tener en cuenta la gran distancia existe entre las estaciones y la diversidad climotológica existente a lo largo de la red.\\\\
+
+\subsubsection{WiFi para cortas distancias}
+
+\subsubsection{WiFi para largas distancias}
+
+
+Acorde con el artículo \cite{simo2014assessing}, vemos como el rendimiento de WiFi en largas distancias no es del todo óptimo, debido a su uso de CSMA/CA como protocolo de acceso al medio. Por ello, se propone realizar un ajuste en el protocolo y utilizar TDMA. Así obtendremos una mayor eficiencia y evitando contiendas en el medio que resultan muy ineficientes en distancias largas. Independientemente del protocolo utilizado en la capa MAC, cualquier \textit{hardware} que utilice el estándar 802.11 tendrá las características mencionadas anteriormente. Por tanto, la cuestión es obtener un equilibrio en cuanto a despliegue y rendimiento. Por un lado, deberemos garantizar la línea de visión directa entre radioenlaces de nuestra red, y por el otro lado deberemos proponer una solución viable en lo que a inversión en estructura y equipos se refiere.\\\\
+
+\subsubsection{Marco legislativo}
+En 2008 el CTM alojó las bandas destinadas a la tecnología WiFi en las siguientes frecuencias: 902-928 MHzs, 2,4-2,483.5 GHzs, 5,725-5,850 GHzs, 5,250-5,350 GHzs y 5,470-5,725 GHzs. Dichas bandas estaban destinadas a los servicios de telecomunicaciones en zonas rurales y áreas en las cuáles no se requería el uso de banda licenciada. \\\\
+
+De igual forma, durante el 2011 y hasta el 2013 está legislación sufrió algunas actualizaciones, conviertiendo la banda de 902-915 MHzs en una banda licenciada para el uso de servicios de telecomunicaciones. Por tanto, el CTM tuvo que reestructurar está repartición del espectro. Dicho rediseño se llevó a cabo en 2013 como resultado, el reparto de espectro quedó de la siguiente manera: 915-928 MHz, 916-928 MHz, 2,400-2,483.5 GHzs, 5,725-5,850 GHzs, 5,250-5,350 GHzs y 5,470-5,725 GHzs.\\\\
+
+El CTM redistribuyó el espectro radioeléctrico en consecuencia de la fuerte demanda de servicios de telecomunicaciones existentes. Dicha reforma garantizaba la viabilidad de los servicios en redes ya esxistintes, y promovía el despliegue de nuevas redes que aportarán una solución frente a la fuerte demanda existente. El uso de banda no licenciadas era un factor clave a la hora de rehacer esta distribución, ya que los operadores de telefonía no percibían ningún tipo de coste si utilizaban dichas bandas.\\\\
+
+		
+\subsection{WiMAX}
+El estándar IEEE 802.16, más comunmente conocido como WiMAX, fue diseñado para su uso en áreas metropolitanas, aunque debido a su funcionamiento existe la posibilidad de utilizarlo en áreas rurales que utilizan banda ancha. Si bien el estándar IEEE 802.16 especifica el uso de esta tecnología en distintas bandas de frecuencias, y uno de los perfiles es para bandas no licenciadas en 5 GHzs, el consorcio de empresas conocido como WiMAX Forum, responsable de certificar la compatibilidad e interoperabilidad de productos en el marco de este estándar, no ha reconocido un perfil para bandas no licencias. Por lo tanto, existen equipos IEEE 802.16 que funcionan en banda libre de 5 GHz, pero formalmente no podrían usar la denominación WiMAX. El protocolo de acceso al medio de este estándar es TDMA y la técnica de transmisión utilizada es OFDM.\\\\
+
+La capacidad óptima en un radioenlace que utiliza WiMAX depende entre otros factores, de la modulación que se consiga transmitir, la codificación utilizada, el tamaño de la trama que deseemos enviar y el intervalo de guarda existente entre los símbolos OFDM. Acorde con el artículo \cite{simo2014assessing} las tasas obtenidas si utilizamos WiMAX en enlaces de larga distancia, pueden estar comprendidas entre 1.6 Mbps y 33 Mbps, teniendo en cuenta un envío de 20 tramas por milisegundo. Estos resultados de diversidad y ganancia espacial son similares a los obtenidos con WiFi. \\\\
+		
+Aunque los sistemas de comunicaciones que utilizan los estándares 802.11 y 802.16 en bandas no licenciadas tienen un bajo coste, tanto por el precio de los equipos como por la posibilidad de utilizar el espectro sin pagar licencias, su despliegue si entraña costes nada desdeñables por el diseño y construcción de estructuras de soporte para ubicar los sistemas de comunicación y las antenas a las elevaciones necesarias para enlaces de largas distancias, con el objetivo de mantener línea de visión directa. Dependiendo del contexto geográfico y de la distancia focos de concentración de población, la instalación de estas estructuras de soporte pueden ser un coste muy dominante que hagan muy costoso el despliegue de las infraestructuras de transporte con independencia del equipamiento de comunicaciones usado. Aparte de esto, la transmisión de potencia en bandas no licenciadas se debe tener en cuenta, pues existen restricciones de límites de potencia, lo que condicionan la viabilidad de nuestros enlaces.
+
+\subsubsection{Marco legislativo}
+En el año 2005 y con el objetivo de mejorar el acceso a los servicios de telecomunicaciones mínimos, el CTM destinó las bandas de 3,4-3,5 GHzs y 3,5-3,7 GHzs (también conocidas como bandas 3,4) para dicho objetivo. Aparte de este reparto, el MTC dictaminó que los operadores que quisieran obtener un canal en las bandas ya mencionadas deberían limitarlo a un tamaño máximo de 50 MHzs, independientemente del área geográfica en cuestión.\\\\
+
+En el 2006 este espectro volvió a sufrir otro rediseño, dejando las bandas comprendidas entre las frecuencias de 2,5-2,692 GHzs para el acceso público a servicios mínimo de telecomunicaciones. Dicho rediseño trajo consigo una subasta de parte del espectro por parte del MTC, garantizando el uso de bandas libres de impuestos en Lima. A lo largo de 2007, el MTC se dio cuenta que dichas bandas tenían un gran potencial en cuanto a rentabiliadad y rendimiento, por lo tanto decidieron dedicar esas bandas a mejorar el uso de servicios móviles mediante el uso de WiMAX.\\\\
+
+Este último hecho no suponía una tarea sencilla, ya que parte del espectro tenía que volver a ser restructurado y esto implicaba una inversión económinca adicional para recuperar la licencia de las bandas antes mencionadas. Con el objetivo de ampliar la infraestructura de redes y mejorar el acceso a las ya existentes, en 2010 se llevó a cabo otra reestructuración del espectro. Esto implicó una inversión de capital adicional ya que muchas bandas habían sido licenciadas.
+
+		
+\subsection{LTE}
+
+\subsubsection{Marco legislativo}
+Desde 2005 el MTC permitía a los operadores de telecomuniaciones adquirir bandas licenciadas con un máximo de 60 MHzs para ofrecer sus servicios. Dicho modelo estaba enfocado a mantener la viabilidad y competitivdad en el mercado de las telecomunicaciones, en cuanto al acceso público a redes. El espectro que se ofertaba y el que era accesible por parte de las operadoras era el comprendido entre 700, 800, 900 y 1900 MHzs. En 2010, este espectro fue identificado como una barrera para el desarrollo e implementación de acceso a nuevas redes, tanto en un entorno urbano como en un entorno rural.Como resultado de esto, se estableció un nuevo plan de políticas y regulaciones con el objetivo de maximizar el rendimiento del espectro actual teniendo en cuenta la aparición de nuevas tecnologías y las exigencias del mercado de las telecomunicaciones.\\\\
+
+En el 2011,  por un lado las operadoras ofrecían sus servicios de acceso a la red en las bandas de 800 y 1900 MHzs y por el otro, el MTC alojaba badnas adicionales para promover el acceso a nuevos servicios públicos de telecomunicaciones. Dichas bandas son las siguientes: 894 - 902 MHzs, 939-947 MHzs, 902-915 MHzs, 947-960 MHzs 1,710 - 1,770 GHzs, 2,110 - 2,170 MHzs, 902-915 MHzs y 947-960 MHzs. Todas estas bandas fueron subastadas a las operadoras, lo que manifestaba una creciente demanda en cuanto al desarrollo de nuevas redes de acceso utilizando nuevas tecnologías.\\\\
+
+En 2013 el MTC realizó una modificación en la regulación de uso del espectro. Esta nueva regulación estaba enfocada a modificar los 60 MHzs que imponían a las operadoras, ya que en muchos casos se estaba alcanzando e incluso sobrepasando dicha capacidad. Para ello, se mantuvo el uso de 60 MHzs en las bandas de 800, 900 y 1900 MHzs mientras que en las bandas de 1,7 y 2,1 GHzs se ofertaban 80 Mhzs en total, divididos en dos franjas de 40 MHzs ubicadas cada una de ellas en diferentes partes del espectro. El uso creciente de tecnologías 4G-LTE provocó que el MTC subastará dos bloques dedicados en las bandas de 1,7 y 2,1 GHzs para dichas tecnologías.
+
+\subsection{Espectro televisivo}
+
+\subsubsection{Marco legislativo}
+La tecnología de espectro televisivo o TSWV utiliza los "espacios en blanco" o huecos existentes en las bandas dedicadas al espectro televisivo para obtener un aprovechamiento de los mismos. Siendo estos reutilizados para alojar otro tipo de espectro de radiotelecomunicaciones y obtener así un mejor rendimiento y reparto del espectro existente.\\\\
+
+A comienzos del año 2006, el MTC alojo parte de este espectro aprovechable en la banda de 470-584 MHzs perteneciente a la televisión digital, cuyo ancho de banda era de 6 MHzs. En 2009, se decidió amplicar el espectro e incluir en éste dos canales, uno que serviría para realizar ensayos y otro para la realización de pruebas. Dicho aumento del espectro abarcaba las bandas de 470-608 MHzs y 614-746 MHzs, dichas ampliación del espectro permitía utilizar badnas destinadas tanto a televisón digital como analógica. \\\\
+
+En 2015 y con el objetivo de mejorar los servicios móviles, el espectro sufrió otro rediseño. Dicha reestructuración provocó que el rango de los "espacios en blanco" reutilizables para otro tipo de telecomunicaciones modificara las frecuencias establecidas, las bandas de 470-608 MHzs y 614-698 MHzs fueron las destinadas a ser reutiizadas.
+
+\section{Red de tráfico en redes}
+	Para obtener un control total sobre la red es imprescindible conseguir una adecuada monitorización y gestión de la red. Gestionar y monitorizar una red no sólo implica parametrizar los dispositivos que la componen, sino también implica garantizar los niveles de QoS previamente definidos en el diseño.\\\\
+	
+	En nuestra red de \textit{backhaul}, debemos asegurar al menos los niveles de QoS pertenecientes a señalización, tráfico de voz y datos. Entiéndase por nivel de QoS (respecto a la viabilidad del enlace) a la obtención de una tasa mínima de los parámetros \textit{throughput}, \textit{delay}, \textit{jitter} y al porcentaje de paquetes perdidos. Contexto en el que debemos tener en cuenta qué tipos de tráficos van a coexistir y cómo afectan cada uno de ellos al rendimiento total de la red.\\
+	A continuación, se detallan tres posibles soluciones (DiffServ, MPLS y MPLS-TE) para gestionar dicho problema y garantizar el mínimo de QoS:
+	\begin{itemize}
+		\item DiffServ es una arquitectura de red que permite clasificar el tráfico y manejar los diferentes niveles de QoS. DiffServ diferencia los paquetes IP mediante el uso del campo Servicios Diferenciados (DS), que forma parte de la cabecera del paquete, permitiendo así definir diferentes tipos de QoS y prioridades.\\
+		Esta arquitectura permite adaptar al comportamiento de la red según el tipo de tráfico, y manejar los diferentes niveles de QoS en función de la prioridad y probabilidad de paquetes desechados. Sin embargo, y como principal desventaja, no es compatible con servicios QoS cuantitativos. 
+		
+		\item MPLS (\textit{Mutiprotocol Label Switching}) es un mecanismo de transporte de datos que trabaja sobre la capa de red. El tráfico de datos es identificado mediante una etiqueta, evitando así la necesidad de utilizar la tablas de enrutamiento IP, y asociando a cada tráfico un particular nivel de QoS.\\
+		Cada paquete tiene un camino predefinido; ese camino está definido mediante una etiqueta. Dichas etiquetas están distribuidas a los largo de la red mediante LDP (\textit{Label Distribution Protocol}). Este protocolo permite a los routers involucrados en la red, también denominados LDP \textit{peers}, intercambiar información de manera bidireccional sobre la red,  obteniendo así una base de datos LSP (\textit{Label-switched path}) sobre los diferentes caminos existentes y el tráfico existente en cada uno de ellos.
+		 
+		\item MPLS-TE es una variación de MPLS. La diferencia con MPLS, y principal característica de TE, es que nos permite realizar conexiones entre nodos finales dentro de la propia red. Estos enlaces internos son denominados túneles y restringen el uso de los recursos compartidos de la red a los circuitos virtual que la forman, creando así una protección mutua entre ellos. Como consecuencia de esto, la distribución del ancho de banda es igual o inferior al total disponible. 
+	\end{itemize}
+	
+	\section{Monitorización de redes}
+	Una vez comentados los distintos protocolos de gestión de tráfico, procedemos a detallar algunos de los programas de \textit{software} libre destinados a la monitorización y gestión de redes para el desarrollo del proyecto:
+	  
+	\begin{itemize}
+		\item Nagios Core \cite{Nagios} es un \textit{software} diseñado y desarrollado por la empresa Nagios. Permite monitorizar vía web cualquier infraestructura y dispositivo red, estableciendo un conjunto de reglas basadas en servicios y alertas reportando información sobre el funcionamiento de la red.\\
+		Nagios Core ofrece gran variedad de servicios y funcionalidades respecto a la monitorización, siendo capaz de monitorizar servicios red (HTTP, SNMP, POP3, etc...) y recursos de los dispositivos (carga de CPU, temperatura, espacio libre, etc...). Igualmente, existe la opción de autoconfigurar y desarrollar nuestros propios servicios y no sólo utilizar los predefinidos por el fabricante (que aparecen por defecto). También existe la posibilidad de generar notificaciones sobre cualquier servicio, y éstas pueden ser enviadas vía email (u otro método que defina el usuario). Para una configuración personalizada no hacen falta librerías adicionales, ya que la versión Core incluye todas las funcionalidades básicas para la gestión y monitorización de redes. No obstante, se pueden incluir otras funcionalidades como representación de gráficos en un \textit{Dashboard}, exportación de configuraciones o utilización de proveedor de correo externo al de la propia herramienta. Todo esto podremos hacerlo mediante la adicción de \textit{plugins} al Core.
+		
+		\item Zabbix \cite{Zabbix} es un \textit{software} íntegramente libre desarrollado por Zaabix SIA. Este \textit{software} nos permite monitorizar numerosos parámetros de nuestra red, bien sean servicios (HTTP, SNMP, SSH, etc..) o bien sean parámetros de los dispositivos (uso de CPU, porcentaje uso de CPU, temperatura, etc...) referidos a los servicios y estado de los dispositivos que la componen. Para ello, Zabbix utiliza un sistema de notificaciones configurables, las cuáles pueden enviarse vía email (utilizando cualquier proveedor de correo). Dichas notificaciones nos informarán sobre los sucesos que están ocurriendo sobre los dispositivos red y los servicios configurados.\\
+		En orden con lo anterior, Zabbix permite editar y configurar diferentes tipos de notificaciones y alertas sin necesidad de añadir nada a la herramienta. Además de esto, el reporte de datos es periódico y no sólo de manera numérica sino de forma gráfica (dichas gráficas también pueden ser configurables). Del mismo modo, existe la posibilidad de almacenar todo los datos reportados procedente de los dispositivos que forman la red en bases de datos (MySQL, SQLite, PostgreSQL o Oracle).
+		
+		\item Pandora OpenSource \cite{Pandora} es un \textit{software} de gestión y monitorización desarrollado por la empresa Pandora FMS Enterprise que proporciona una solución capaz de monitorizar cualquier infraestructura de red asegurando que todos los elementos de la red estén funcionando bajo los criterios de operación establecidos. Esto es debido a la información procedente de los dispositivos de la red al realizarse pruebas sobre ellos, ya sea de manera remota o mediante un agente. \\
+		La versión libre de este software permite monitorizar y gestionar parámetros referentes a los servicios de red estándar TCP/IP y valores relacionados con el hardware de los equipos gracias a un sistema de eventos. Este sistema obtiene la información al producirse cualquier evento en la red. Al basarse en dicha funcionalidad, el usuario puede validar los eventos y agruparlos según la distribución de la red. Debido a esto el software utiliza una monitorización combinada en grupos, lo que quiere decir que, según el grupo en el que se encuentre un dispositivo, sus alertas y su configuración de servicios serán diferentes al resto.\\\\
+	\end{itemize}
+	
+	Una vez introducidos diferentes tipos de \textit{software} en gestión y monitorización de redes procedemos a analizar cuál de ellos encaja mejor en el marco de nuestro proyecto según las diferentes limitaciones y requisitos.\\\\
+	
+	En primer lugar, nuestro \textit{software} debe ser capaz de monitorizar todos los requisitos mínimos para garantizar un cierto nivel de QoS. Además de esto es conveniente que exista cierta flexibilidad a la hora de modificar y añadir notificaciones en los diferentes equipos, así como la posibilidad de recibir y enviar dichas notificaciones al usuario mediante email, o cualquier método similar. Del mismo modo, el \textit{software} debe tener una integración sencilla sobre nuestra infraestructura de red.\\\\
+	
+	En segundo lugar, la obtención y representación de datos de forma dinámica es una parte importante que la herramienta ha de tener. Lo deseable es que la infraestructura de red sea autogestionable y plenamente monitorizable por el propio \textit{software}, es decir, tratar de que cualquier servicio y parámetro pueda ser representado de manera concreta para otorgar al usuario la información adecuada para interactuar, si fuera necesario, con la red.\\\\
+	
+	En tercer lugar, nuestro \textit{software} ha de ser flexible en cuanto a escalabilidad de dispositivos y configuración de notificaciones, puesto que nuestra red es extensa y heteréogenea en cuanto al número de equipos y su uso. Otro requisito a tener en cuenta es que debe cumplir con un sistema de negocio viable, ya que el proyecto tiene limitada la inversión económica y es muy deseable utilizar un software cuya prestación sea total a coste cero.\\\\
+	
+	Teniendo en cuenta todo lo comentado anteriormente, la solución propuesta para el proyecto es Zabbix.\\\\
+	
+	Zabbix permite una fácil integración y monitorización de la red, permitiendo al usuario administrar los dispositivos y configurar los servicios de manera sencilla sin excesiva complejidad. Gracias a su interfaz gráfica podemos obtener en todo momento una representacion en tiempo real del estado de los dispositivos, así como de los requisitos pertenecientes al QoS. Dichos datos pueden ser almacenados en bases de datos y exportados a ficheros.\\
+	Por un lado, Zabbix no sólo permite al usuario definir dispositivos, sino que existe la posibilidad agruparlos en diferentes categorías, otorgando la opción de realizar una gestión individualizada o colectiva, según desee el usuario. Por otro lado, se pueden crear servicios mediante un fichero XML y vincularlo con el dispositivo deseado,  configurando alertas y notificaciones personalizadas. 
+	

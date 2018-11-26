@@ -1,0 +1,79 @@
+\documentclass[a4paper, 12pt]{report}
+\usepackage[T1]{fontenc}
+\sloppy 
+\usepackage[a4paper, left=2.5cm, right=2.5cm, top=3cm, bottom=3cm]{geometry}
+\usepackage{color}
+\usepackage{times}
+\usepackage{afterpage}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{url}
+\usepackage{graphicx}
+\usepackage{float}  %% H para posicionar figuras
+\usepackage[nottoc, notlot, notlof, notindex]{tocbibind} %% Opciones de índice
+\usepackage[none]{hyphenat}
+\usepackage{cite}
+\usepackage[bookmarks = true, colorlinks=true, linkcolor = black, citecolor = black, menucolor = black, urlcolor = blue]{hyperref}
+\setcounter{tocdepth}{3}
+\setcounter{secnumdepth}{3}
+\usepackage{listings}
+
+\begin{document}
+	\pagestyle{empty}
+	\begin{titlepage}
+		\centering
+		\includegraphics[scale=0.5]{img/logo_urjc.jpg}
+		\vspace{3cm}
+		
+		\Large
+		GRADO EN INGENIERÍA EN TECNOLOGÍAS DE LAS TELECOMUNICACIONES
+		
+		\vspace{0.4cm}
+		
+		\large
+		Curso Académico 2018/2019
+		
+		\vspace{0.8cm}
+		
+		Trabajo Fin de Grado
+		
+		\vspace{2.5cm}		
+		\LARGE		
+		DISEÑO Y PLANIFICACIÓN DE UNA RED DE
+		BACKHAUL RURAL PARA ESTACIONES DE
+		ACCESO 3G EN PUEBLOS AISLADOS DE LA
+		AMAZONÍA PERUANA
+		
+		\vspace{2.5 cm}
+		
+		\large
+		Autor : Adrián Úbeda-Portugués Casas \\
+		Tutor : Dr. Francisco Javier Simó Reigadas
+		\afterpage{\null\newpage}
+		\pagestyle{empty}
+	\end{titlepage}
+	
+	\input{dedicatoria}
+	\input{agradecimientos}
+	\input{resumen}
+	
+	\thispagestyle{empty}
+	\tableofcontents
+	\afterpage{\null\newpage}
+	\pagestyle{empty}
+	\thispagestyle{empty}
+	\setcounter{page}{1}
+	\pagestyle{plain}
+	\pagenumbering{arabic}
+	
+	\input{introduccion}
+	\input{marco_teorico}
+	\input{metodologia}
+	\input{resultados_obtenidos}
+	\input{conclusion}
+	\input{anexo}
+	
+	\bibliographystyle{acm}
+	\bibliography{tfg}
+	
+\end{document}

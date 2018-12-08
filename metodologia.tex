@@ -9,15 +9,15 @@ En segundo lugar, se realizarán pruebas a nivel de laboratorio utilizando confi
 \section{Equipos propuestos}
 Con el objeto de seleccionar aquellos equipos que mejor rendimiento y prestaciones ofrezcan al proyecto, se ha establecido una comparativa y estudio entre diferentes propuestas. Dichas propuestas no sólo deben adaptarse y cumplir a los requerimientos técnicos del proyecto, si no que también deben mostrar un rendimiento adecuado al coste establecido por el proyecto.\\\\
 
-Para ello, y con la ayuda de la PUCP se ha establecido un protocolo de pruebas que nos mostrará el rendimiento de los equipos sobre pruebas realizadas en campo. Dichas pruebas determinarán qué equipos son los finalmente seleccionados como solución del proyecto. A continuación, se procede a detallar cada uno de los equipos involucrados en este estudio y la comparativa entre ellos.
+Para ello se ha establecido un protocolo de pruebas que nos ofrecerá el rendimiento de los equipos sobre pruebas realizadas en campo, gracias a la aportación de la PUCP. Dichas pruebas determinarán qué equipos son los finalmente seleccionados como solución del proyecto. A continuación, se procede a detallar cada uno de los equipos involucrados en este estudio y la comparativa entre ellos.
 
-\subsection{Equipos Ubiquiti: AirFiber AF-5X}
-Los equipos AirFiber son equipos pertenecientes a la empresa estadounidense Ubiquiti Networks \cite{Ubiquiti}. Esta empresa se dedica principalmente al desarrollo y comercialización de dispositivos para redes inalámbricas, ya sean de larga o corta distancia. Los equipos desarrollados por la empresa se caracterizan por su alto rendimiento y su bajo coste. \\\\
+\subsection{Equipos Ubiquiti}
+Los equipos pertenecientes a la empresa estadounidense Ubiquiti Networks \cite{Ubiquiti}, son exportados y utilizados a lo largo de todo el mundo en lo que a comuniaciones inalámbricas se refiere, convirtiendo así a la empresa en un referente mundial. Esta empresa se dedica principalmente al desarrollo y comercialización de dispositivos para redes inalámbricas, ya sean de larga o corta distancia. \\\\
 
-Actualmente existe una gran variedad de dispositivos diseñados para redes inalámbricas, en nuestro caso utilizaremos el modelo AirFiber AF-5x, perteneciente a la familia AF de dispositivos radio. La pecularidad de este modelo es la utilización de la banda de 5 GHzs como frecuencia operacional, y no sólo eso, si no que además este modelo abarca todo el espectro radioeléctrico en el rango de 5 GHzs, tanto las bandas licenciadas como las que no lo son. Aparte de esto, estos equipos permiten ajustar el ancho de banda operacional, en el caso del modelo AF-5X de 10 a 50 MHzs, en intervalos de 10 MHzs otorgando mayor flexibilidad a la configuración de canales de subida y de bajada. Además de esto, los equipos permiten ajustar los canales de transmisión y recepción evitando así que existan interferencias en los canales seleccionados.
+Los equipos desarrollados por la empresa se caracterizan por su alto rendimiento, su bajo coste y su alta eficiencia energética, cmpliendo así con los requisitos mínimos establecidos en el proyecto Napo. En el marco del proyecto los equipos Ubiquiti AirFiber AF-5X y PowerBeam 5AC-620, los cuáles se detallarán a continuación, han sido propuestos como solución. De igual forma, se ha detallado el \textit{software} de gestión de los equipos Ubiquiti, que en el caso de ambos funciona de idéntica forma.
 
-\subsubsection{Hardware}
-Los dispositivos AF-5x están diseñados con una carcasa de silicona que recubre la placa empotrada que forma el equipo, tal y como se muestra en la figura \ref{af_5x}, el diseño sencillo de los equipos y sus conexiones salientes hacen de él un equipo muy versátil y flexible a la hora de ser integrado con otros componentes, como por ejemplo una antena o un sistema empotrado sobre una torre. Aparte de su flexibilidad a nivel físico, también ofrece gran versatilidad en su comportamiento, permitiendo así utilizar este equipo en diferentes roles según requiera la arquitectura diseñada, ya sea bien como estación base, o como un repetidor. De igual forma, su sistema está diseñado para ofrecer el máximo rendimiento de la transmisión mediante la reducción de señales interferentes y habilitando la posibilidad de utilizar constelaciones mayores para obtener un mayor \textit{trhoughput}.
+\subsubsection{AirFiber AF-5X}
+Los dispositivos AF-5x están diseñados con una carcasa de silicona que recubre la placa empotrada que forma el equipo, tal y como se muestra en la figura \ref{af_5x}, el diseño sencillo de los equipos y sus conexiones salientes hacen de él un equipo muy versátil y flexible a la hora de ser integrado con otros componentes, como por ejemplo una antena o un sistema empotrado sobre una torre. Aparte de su flexibilidad a nivel físico, también ofrece gran versatilidad en su comportamiento, permitiendo así utilizar este equipo en diferentes roles según requiera la arquitectura diseñada, ya sea bien como estación base, o como un repetidor. De igual forma, su sistema está diseñado para ofrecer el máximo rendimiento de la transmisión mediante la reducción de señales interferentes y habilitando la posibilidad de utilizar constelaciones mayores para obtener un mayor \textit{throughput}.
 
 \begin{figure}[H]
 		\centering
@@ -25,8 +25,29 @@ Los dispositivos AF-5x están diseñados con una carcasa de silicona que recubre
 		\caption{Dispositivo AF-5X}
 		\label{af_5x}
 	\end{figure}
+
+ Los dispositivos radio de esta familia, utilizan la banda de 5 GHzs como frecuencia operacional y no sólo eso, si no que además este modelo abarca todo el espectro radioeléctrico en el rango de 5 GHzs, tanto las bandas licenciadas como las que no lo son. Aparte de esto, estos equipos permiten ajustar el ancho de banda operacional, en el caso del modelo AF-5X de 10 a 50 MHzs, en intervalos de 10 MHzs otorgando mayor flexibilidad a la configuración de canales de subida y de bajada. Además de esto, los equipos permiten ajustar los canales de transmisión y recepción evitando así que existan interferencias en los canales seleccionados.
 	
-\subsubsection{Software}
+\subsubsection{PowerBeam 5AC-620}
+La familia de equipos PowerBeam, independientemente del modelo, se caracteriza por su estructura y diseño, ya que tal y como se muestra en la figura \ref{powerBeam} el dispositivo radio está integrado junto a la estructura de la parabólica, proporcionando así un mejor acople ya que se evitan las pérdidas con cable. Además esta característica en el diseño, los equipos PowerBeam cuentan con la tecnologías AirMAX AC desarrollada por Ubiquiti que permite focalizar la comunicación en una única dirección ofreciendo así robustez frente a interferencias filtrando el ruido no deseado.
+
+\begin{figure}[H]
+		\centering
+		\includegraphics[width=5cm,height=5cm]{img/powerbeam.PNG}
+		\caption{Dispositivo PowerBeam 5AC-620}
+		\label{powerBeam}
+\end{figure}
+
+Otra característica importante de estos equipos es cómo permiten a los usuarios utilizar los enlaces para subida y descarga de datos. En este caso, la tecnologías AirMAX utiliza el protocolo de acceso al medio TDMA pero con una modificación desarrollada por Ubiquiti, ilustrado en la figura \ref{tdma_ac}. Esta modificación consiste en asignar previamente \textit{slots} de tiempo a los usuarios mediante un punto de acceso inteligente integrado en el propio dispositivo, esto permite minimizar problemas de colisión cómo el problema del nodo escondido y aumentar el rendimiento del equipo llegando a obtener tasas mayores a 450 Mbps mientras que los equipos sin dicha tecnologías se mantienen en el umbral de 150 Mbps.
+	
+\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.5\textwidth]{img/tdma_ac.PNG}
+		\caption{Protocolo TDMA con tecnologías AirMAX AC}
+		\label{tdma_ac}
+\end{figure}
+	
+\subsection{Software}
 Los equipos propietarios de la marca Ubiquiti utilizan un \textit{software} propietario que permite controlar y configurar los equipos. Aunque no esté en su versión final, el programa Ubiquiti Network Management System (UNMS) otorga al usuario un control absoluto sobre los dispositivos que conforman la red, y una serie de aplicaciones internas para obtener una correcta parametrización del rendimiento de los equipos. Tal y como se muestra en la figura \ref{unms} podemos ver como la pantalla principal del \textit{software} muestra diferentes tipos de configuración, paneles de interacción con el usuario, así como diferentes pestañas en las cuales se muestran datos a tiempo real del rendimiento de los equipos. 
 
 \begin{figure}[H]
@@ -100,8 +121,21 @@ Los equipos NetMetal 5 son dispositivos pertenecientes a la familia de RouterBOA
 		Al igual que la herramienta web, WinBox ofrece la posibilidad de utilizar una terminal compatible con el equipo y sistema operativo RouterOS. Dicha funcionalidad permite introducir y modificar las configuraciones existentes en los dispositivos, así cómo visualización de parámetros y realización de pruebas utilizando las herramientas integradas que posee el sistema operativo.
 		
 \section{Comparación entre equipos}	
+Antes de proceder a comparar los equipos detallados anteriormente, debemos primero explicar el protocolo de pruebas que se ha elaborado con la colaboración de los compañeros involucrados pertenecientes a la PUCP. Dicho protocolo nos servirá para valorar y evaluar las prestaciones de cada uno de los equipos de forma individual y establecer una comparativa, con el fin de obtener una solución lo más viable y factible posible en lo que al marco del proyecto se refiere. \\\\
 
-		
+ El protocolo de pruebas diseñado en colaboración con la PUCP no sólo implica realizar pruebas de campo con los equipos, si no que se realizarán simulaciones parametrizadas en RadioMobile a modo complementario para decidir cúal es el equipo que más se adapta a las condiciones del proyecto. Las pruebas de campo conllevarán la configuración de un enlace punto a punto en las instalaciones disponibles para dicho efecto de la PUCP. Una vez configurado el enlace, se realizarán pruebas de conectividad utilizando programas para inyectar tráfico y se examinarán los valores obtenidos. De forma simultánea, se registrarán los valores energéticos proporcionados por los equipos durante las pruebas para contrastar su eficiencia energética.\\\\
+ 
+ Las pruebas realizadas por la PUCP han sido llevadas a cabo en diferentes emplazamientos, ubicados en Iquitos-Mazán para el caso de los equipos Net Metal 5 y RM-MAX, y por otro lado para los equipos Ubiquiti en los emplazamientos encontrados en Pachatutec (Ventanilla) y San Miguel. No obstante, las características de los emplezamientos mencionados y sus perfiles geográficos son muy parejos, por lo tanto sí que nos sirven para realizar nuestro análisis. De igual forma, este estudio se ha tenido que realizar de forma interrumpida, es decir primero una pareja de equipos y después la otra, debido a las disponibilidad de los emplazamientos y equipos.\\
+ La configuración de ambos escenarios sigue un esquema como el mostrado en la figura \ref{pruebasPUCP}, el cúal está compuesto por torres metálicas sobre las cuáles se encuentran antenas de igual ganancia que las existentes en las instalaciones del río Napo.
+ 
+ 
+ \begin{figure}[H]
+			\centering
+			\includegraphics[width=0.7\textwidth]{img/escenario_pruebas.png}
+			\caption{Escenario de pruebas propuesto PUCP}
+			\label{pruebasPUCP}
+\end{figure}
+ 
 \section{Configuración y diseño de la red}
 Antes de realizar el montaje del escenario y realización de pruebas en laboratorio, debemos realizar un diseño y estudio sobre la red. Dicho análisis nos permitirá conocer de forma más detalla los diferentes factores que pueden comprometer la viabilidad de los diferentes enlaces que componen la red, y así ajustar la configuración de los equipos a dichos factores para garantizar el objetivo y requisitos predefinidos en el proyecto.\\\\
 

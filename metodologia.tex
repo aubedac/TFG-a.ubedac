@@ -97,8 +97,8 @@ Los equipos NetMetal 5 son dispositivos pertenecientes a la familia de RouterBOA
 		\label{equipo}
 	\end{figure}
 	Existe una variante en los equipos, el cúal en vez de proporcionar tres entradas para antenas externas únicamente proporciona dos entradas.
-	Los equipos NetMetal 5 son capaces de alcanzar altas tasas de transmisión en comunicaciones inalámbricas de larga distancia, gracias al uso del estándar 802.11ac y su eficiencia en cuánto al uso de los canales de 20/40/80 MHzs. Este hecho añadido a su robustez hacen de los equipos una elección idónea para el contexto del proyecto.\\
-	Para llevar a cabo este Trabajo Fin de Grado, se han utilizados dos equipos NetMetal 5 como escenario de laboratorio.
+	Los equipos NetMetal 5 son capaces de alcanzar altas tasas de transmisión en comunicaciones inalámbricas de larga distancia, gracias al uso del estándar 802.11ac y su eficiencia en cuánto al uso de los canales de 20/40/80 MHzs. Este hecho añadido a su robustez hacen de los equipos una elección idónea para el contexto del proyecto.
+	
 	\subsubsection{Software}
 	El sistema operativo que utilizan los equipos es RouterOS, propietario de MikroTik. Dicha distribución nos permite acceder al dispositivo de manera sencilla y configurar el equipo acorde al escenario requerido. Además de realizar configuraciones en cuánto a los parámetros deseados, el sistema operativo ofrece herramientas para la realización de pruebas a diferentes niveles de conectividad entre equipos. Los datos obtenidos, pueden ser procesados y representados de forma gráfica en tablas, diagramas y ficheros de texto. Independientemente de un formato u otro existe la posibilidad de exportar estos datos.\\\\
 	
@@ -125,9 +125,8 @@ Antes de proceder a comparar los equipos detallados anteriormente, debemos prime
 
  El protocolo de pruebas diseñado en colaboración con la PUCP no sólo implica realizar pruebas de campo con los equipos, si no que se realizarán simulaciones parametrizadas en RadioMobile a modo complementario para decidir cúal es el equipo que más se adapta a las condiciones del proyecto. Las pruebas de campo conllevarán la configuración de un enlace punto a punto en las instalaciones disponibles para dicho efecto de la PUCP. Una vez configurado el enlace, se realizarán pruebas de conectividad utilizando programas para inyectar tráfico y se examinarán los valores obtenidos. De forma simultánea, se registrarán los valores energéticos proporcionados por los equipos durante las pruebas para contrastar su eficiencia energética.\\\\
  
- Las pruebas realizadas por la PUCP han sido llevadas a cabo en diferentes emplazamientos, ubicados en Iquitos-Mazán para el caso de los equipos Net Metal 5 y RM-MAX, y por otro lado para los equipos Ubiquiti en los emplazamientos encontrados en Pachatutec (Ventanilla) y San Miguel. No obstante, las características de los emplezamientos mencionados y sus perfiles geográficos son muy parejos, por lo tanto sí que nos sirven para realizar nuestro análisis. De igual forma, este estudio se ha tenido que realizar de forma interrumpida, es decir primero una pareja de equipos y después la otra, debido a las disponibilidad de los emplazamientos y equipos.\\
- La configuración de ambos escenarios sigue un esquema como el mostrado en la figura \ref{pruebasPUCP}, el cúal está compuesto por torres metálicas sobre las cuáles se encuentran antenas de igual ganancia que las existentes en las instalaciones del río Napo.
- 
+ Las pruebas realizadas por la PUCP han sido llevadas a cabo en diferentes emplazamientos, ubicados en Iquitos-Mazán para el caso de los equipos Net Metal 5 y RM-MAX, y por otro lado para los equipos Ubiquiti en los emplazamientos encontrados en Pachatutec (Ventanilla) y San Miguel. Aunque a simple vista parezca que la ubicación de los emplazamientos seleccionados es muy dispar, la infraestructura existente y sus perfiles geográficos son muy parejos, por lo tanto nos sirve como escenario para realizar nuestro análisis. De igual forma, este estudio se ha tenido que realizar de forma interrumpida, es decir primero una pareja de equipos y después la otra, debido a las disponibilidad de los emplazamientos y equipos.\\
+ La configuración de ambos escenarios sigue un esquema similar al mostrado en la figura \ref{pruebasPUCP}, el cúal está compuesto por torres metálicas y equipos portátiles en los cuáles se realizarán las mediciones de tráfico y se medirá el rendimiento de los equipos, de igual forma la altura e infraestructura de las torres ubicadas en las localizadas anteriormente mencionadas, es semejante a toda la utilizada a lo largo de toda la cuenca del río Napo, por lo que sirve como escenario base.
  
  \begin{figure}[H]
 			\centering
@@ -135,7 +134,60 @@ Antes de proceder a comparar los equipos detallados anteriormente, debemos prime
 			\caption{Escenario de pruebas propuesto PUCP}
 			\label{pruebasPUCP}
 \end{figure}
- 
+
+Antes de comenzar a detallar los resultados obtenidos en cada una de las pruebas realizadas, debemos aclarar los criterios y exigencias mínimas a las que los equipos han sido sometidas. Dichos requerimientos se describen a continuación:
+
+\begin{itemize}
+    \item La gestionabilidad de los equipos se realizará mediante el protocolo SNMP, por tanto debemos disponer de la MIB del fabricante y programa para gestionar los equipos con el objetivo de monitorizar y configurar las pruebas a realizar.
+    \item Diseñar un perfil virtual obtenido a través de RadioMobile configurado con las características de los equipos.
+    \item La calidad del radio enlace establecido ha de tener un nivel de señal satisfactorio. Considerando satisfactorio una potencia de señal recibida comprendida entre -50 y -70 dBm.
+\end{itemize}
+
+Por último y en adición a todo lo comentado anteriormente, se crearán unos cuadros de emparejamiento con los equipos y sus principales características junto a los datos obtenidos en las pruebas para así extraer una conclusión sobre qué equipo es el propuesto como solución en este proyecto.
+
+\subsection{Comparación NetMetal 5 - RM-MAX}
+ Este primer análisis se ha llevado a cabo en los emplazamientos de San Miguel y Ventanilla los cuáles están separados por una distancia de 29 Km y disponen de torres con antenas cuya ganancia es de 34 dBi. Para llevar a cabo las pruebas de tráfico  y eficiencia se han tenido en cuenta los resultado obtenidos en los perfiles obtenidos con la simulación, correspondientes a las imágenes \ref{mikro_sanmiguel} y \ref{mikro_rmmax}; y los datos recopilados en la tabla \ref{table:parámetrosEquipos} que identifican los principales parámetros de los equipos.\\\\
+  \begin{figure}[H]
+			\centering
+			\includegraphics[width=0.6\textwidth]{img/Mikrotik_pruebas.png}
+			\caption{Simulación realizada con la configuración de equipos NetMetal 5 entre las estaciones de San Miguel y Ventanilla}
+			\label{mikro_sanmiguel}
+\end{figure}
+ \begin{figure}[H]
+			\centering
+			\includegraphics[width=0.6\textwidth]{img/rmmax_pruebas.png}
+			\caption{Simulación realizada con la configuración de equipos RM-MAX entre las estaciones de San Miguel y Ventanilla}
+			\label{mikro_rmmax}
+\end{figure}
+ Una vez identificado los primeros valores de viabilidad del enlace, el siguiente paso es realizar pruebas teniendo en cuenta la variación de ancho del canal y la modulación utilizada. En este caso se utilizó la frecuencia de 5745 MHzs como frecuencia operacional, y 20 - 40 MHzs como valores de ancho de banda. Por último, se determinó fijar el valor de la modulación de transmisión en una MCS11, correspondiente a una constelación 16QAM. Los resultados obtenidos se muestran en la tabla \ref{table:pruebasEquipos}, dicha tabla recoge los promedios obtenidos en cuanto al porcentaje de paquetes pérdidos, retardo y \textit{throughput}.\\ 
+Una vez examinado los datos obtenidos en las pruebas realizadas vemos como los equipos Mikrotik ofrecen mejor rendimiento y prestaciones tanto para el ancho de canal de 20 MHzs como para el de 40 MHzs respecto al equipo RM-MAX. \\\\
+
+Mientras que los equipos RM-MAX tienen un \textit{throughput} de 1,42 Mbps, 46\% de paquetes pérdidos y 223 ms de retardo todo ello para 20 MHzs, frente a los 10 Mbps, 12\% y 11 ms que ofrecen los equipos Net Metal 5. Para el ancho de banda de 40 MHzs los resultados siguen siendo iguales, para los valores de 45 Kbps, 63\% y 168 ms que ofrecidos por los equipos RM-MAX, los equipos NetMetal 5 ofrecen valores de 24,32 Mbps, 0,46\% y 10 ms.\\
+A la vista de los resultado los equipos NetMetal 5 son los equipos elegidos como solución frente a los RM-MAX. No sólo por las prestaciones y resultados obtenidos durante las pruebas realizadas, si no también por su mayor eficiencia energética, puesto que los equipos NetMetal 5 consumen 8,35 W mientras que los equipos RM-MAX llevan su consumo hasta 14,29 W de potencia.
+
+\subsection{Comparación PowerBeam AC - AirFiber }
+Para este segundo análisis los emplazamientos escogidos fueron los ubicados en Mazán e Iquitos entre los cuáles existe una distancia de aproximadamente 31 Km. Para llevar a cabo estas pruebas y perfiles greográficos con RadioMobile, se parametrizaron las configuraciones de los equipos acorde a la tabla \ref{table:parámetrosEquiposUbiquiti} y teniendo en cuenta las restricciones existentes en cuanto a la potencia isotrópica radiada equivalente (PIRE), la cúal se establece en 49 dBm para el primer rango de frecuencias y en 54 dBm para el cuarto rango de frecuencias.\\\\
+Por un lado, para conocer la viabilidad del enlace y establecer un mínimo de potencia que garantice la estabilidad del mismo, se han utilizado los perfiles obtenidos en la simulación, dichos perfiles están ubicados a contiuación en la figura \ref{simulacionUbiquiti}. Una vez analizado los perfiles se observa como para el primer rango de frecuencias, existe un limitación de potencia transmitida a nivel legislativo, por tanto nuestra simulación no puede exceder dichos valores. El resultado de la simulación establece que el mínimo de potencia de señal recibidad es de 21,9 dBm con los equipos AirFiber y 23,2 dBm para los equipos PowerBeam.
+
+\begin{figure}[H]
+\centering
+\subfigure[Simulación con PowerBeam AC]{\includegraphics[width=70mm]{img/PowerBeamAC.PNG}}\hspace{2mm}
+\subfigure[Simulación con AirFiber con 24 dBm de potencia de transmisión ]{\includegraphics[width=70mm]{img/AirFiber5x.PNG}}\vspace{2mm}
+\subfigure[Simulación con AirFiber con 22 dBm de potencia de transmisión]{\includegraphics[width=70mm]{img/AirFiber5x_22dBm.PNG}}\hspace{2mm}
+\subfigure[Simulación con AirFiber con 9 dBm de potencia de transmisión]{\includegraphics[width=71mm]{img/AirFiber5x_9dBm.PNG}}\vspace{2mm}
+\caption{Simulación de los equipos Ubiquiti en el escenario Mazán-Iquitos} \label{simulacionUbiquiti}
+\end{figure}
+
+A parte de las pruebas con el escenario  simulado, se llevaron a cabo pruebas a nivel de campo con los equipos con el objetivo de conocer el rendimiento de cada uno de ellos, dichos resultados se adjuntan en la tabla. Una vez recopilados todos los datos y analizados, se extraen las siguientes conclusiones:
+
+\begin{itemize}
+    \item Bajo las condiciones de este escenario, los equipos PowerBeam son más estables utilizando un canal de 20 MHzs, obteniendo una tasa de transferencia promedio de 40 Mbps. Por otra parte,los equipos AirFiber están alcanzando promedios de 37 Mbps utilizando un canal de 40 MHzs y 78 Mbps utilizando un canal 50 MHzs, aunque en ambos casos el enlace presenta inestabilidad.
+    \item El retardo ofrecido por los equipos AirFiber es mucho mejor que el de los equipos PowerBeam.
+    \item En la estación de Iquitos existe una abundante interferencia electromagnética lo que implica configurar de forma fija la modulación máxima, en Mazán se alcanza la modulación 64QAM mientras que en Iquitos se llega a la modulación 16QAM. En las mejores condiciones usando Powerbeam con un ancho de canal 20 MHz y retardos considerables conseguimos transmitir con la modulación de 64QAM; sin embargo, en el caso de Airfiber se consigue transmitir con una modulación de 16QAM con un ancho de canal de 40MHz y bajo retardo.
+\end{itemize}
+
+Una vez comtemplando los diferentes equipos y habiendo realizado pruebas en el escenario destinado para ello y en entornos simulados, los equipos propuestos como solución a usar en el marco de este proyecto son los NetMetal 5. Gracias a su mejor rendimiento en el conjunto global de la evaluación, teniendo en cuenta su eficiencia energética, versatilidad a la hora de establecer configuraciones y manejo de la herramienta de configuración, desempeño durante las pruebas de ancho de badna y tráfico.
+
 \section{Configuración y diseño de la red}
 Antes de realizar el montaje del escenario y realización de pruebas en laboratorio, debemos realizar un diseño y estudio sobre la red. Dicho análisis nos permitirá conocer de forma más detalla los diferentes factores que pueden comprometer la viabilidad de los diferentes enlaces que componen la red, y así ajustar la configuración de los equipos a dichos factores para garantizar el objetivo y requisitos predefinidos en el proyecto.\\\\
 
@@ -242,8 +294,6 @@ En función de estos parámetros el resultado de la prueba será de un modo u ot
 	\caption{Log obtenido al realizar una prueba sobre un enlace MikroTik activo}
 	\label{logTest}
 \end{figure}
-
-\subsection{Configuración y realización de pruebas}
 
 \section{Monitorización y gestión: Zabbix}
 En esta sección se explicará la integración llevada a cabo con el escenario configurado en laboratorio y el \textit{software} de monitorización Zabbix. Así mismo, se procederá a explicar de manera más detallada el funcionamiento de la herramienta seleccionada en el marco contextual definido al inicio de este Trabajo Fin de Grado.\\\\

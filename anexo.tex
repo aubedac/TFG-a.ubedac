@@ -223,6 +223,76 @@
 	\label{table:sensibilidadCampoObtenida}
 \end{table}
 
+\begin{table}[H]
+	\begin{center}
+		\begin{tabular}{|l|l|l|}
+			\hline
+			 & NetMetal 5 & RM-MAX\\
+			\hline 
+		Máx. Consumo de potencia  & 23 W & 8 W \\ \hline
+		Potencia de entrada & 8 - 30 VDC & 48 VDC \\ \hline
+		Frecuencia de operación & 4920 - 6100 MHzs & 2,4 - 2,5 GHzs | 5125 - 5875 MHzs  \\ \hline
+		MIMO & 3x3 & 2x2 \\ \hline
+		Máx. Potencia de transmisión & 33 dBm & 23 dBm \\ \hline
+		Ancho de canal & 20/40/80 MHzs & 5/10/20/40 MHzs \\ \hline
+		Máx. \textit{Throughput} & 1300 Mbps & 50 Mbps \\ \hline
+		\end{tabular}
+	\end{center}
+	\caption{Parámetros de los equipos NetMetal 5 y RM-MAX}
+	\label{table:parámetrosEquipos}
+\end{table}
+
+\begin{table}[H]
+	\begin{center}
+		\begin{tabular}{|l|l|l|}
+			\hline
+			 & PowerBeam AC & AirFiber\\
+			\hline 
+		Máx. Consumo de potencia  & 8.5 W & 12 W \\ \hline
+	    Rango de Frecuencias (MHzs)| PIRE Máx (dBm)  & 5150 - 5875 | 53 dBm & \makecell{5150 - 5250 | 49 dBm \\ 5250 - 5350 | 30 dBm \\ 5470 - 5725 | 30 dBm \\ 5725 - 5850 |36, 54 dBm } \\ \hline
+	    
+		Máx. Potencia de transmisión & 24 dBm & 26 dBm \\ \hline
+		\end{tabular}
+	\end{center}
+	\caption{Parámetros de los equipos PowerBeam AC y AirFiber}
+	\label{table:parámetrosEquiposUbiquiti}
+\end{table}
+
+\begin{table}[H]
+	\begin{center}
+		\begin{tabular}{|l|l|l|}
+			\hline
+			 & NetMetal 5 & RM-MAX\\
+			\hline
+            Ancho de canal & 20 - 40 MHzs & 20 - 40 MHzs\\
+			\hline 
+		Promedio pérdida paquete  & 12,68\% - 0,46\% & 46\% - 63,66\% \\ \hline
+		Promedio retardo (ms) & 11,47 - 10,69 & 223,52 - 168,27 \\ \hline
+		Promedio Bandwidth TCP (Mbps) & 10,12 - 19,30  & 1,44 - 0.005  \\ \hline
+		Promedio Bandwidth UDP (Mbps) & 14,25 - 24,32  & 0,03 - 0.006  \\ \hline
+		\end{tabular}
+	\end{center}
+	\caption{Resultados obtenidos al realizar pruebas sobre los equipos NetMetal 5 y RM-MAX}
+	\label{table:pruebasEquipos}
+\end{table}
+
+\begin{table}[H]
+	\begin{center}
+		\begin{tabular}{|l|l|l|}
+			\hline
+			 & PowerBeam AC  & AirFiber 5x\\
+			\hline
+            Ancho de canal & 20 MHzs & 40 - 50 MHzs\\
+			\hline 
+		Promedio pérdida paquete  & 40\% & 20\% \\ \hline
+		Promedio retardo (ms) & 183.07  & 10.31 \\ \hline
+		Promedio Bandwidth TCP (Mbps) & 40  & 37 - 78 \\  \hline
+		\end{tabular}
+	\end{center}
+	\caption{Resultados obtenidos al realizar pruebas sobre los equipos Ubiquiti}
+	\label{table:pruebasEquiposUbiquiti}
+\end{table}
+
 \section{Código utilizado}
 El siguiente código es el utilizado para la representación de \textit{throughput} en función de la distancia  y MCS, guardado en el archivo \texttt{capacidades.py}:
 \begin{lstlisting}[caption={Script utilizado para representar \textit{throughput} en función de la distancia.}\label{lst:script},captionpos=b][language=Python]

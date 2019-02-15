@@ -293,6 +293,51 @@
 	\label{table:pruebasEquiposUbiquiti}
 \end{table}
 
+\begin{table}[H]
+	\begin{center}
+		\begin{tabular}{|l|l|l|}
+			\hline
+			 &  0 Km  & 30 Km\\ \hline
+            MCS8 & 10,4 & 8,8 \\ \hline 
+		  MCS9 & 19,2 & 17,8 \\ \hline
+		  MCS10 & 27,8 & 26,4 \\ \hline
+		  MCS11 & 37 & 35,3 \\ \hline
+		  MCS12 & 63,5 & 52,6 \\ \hline
+		  MCS13 & 77,2 & - \\ \hline
+		  MCS14 & 81,1 & - \\ \hline
+		  MCS15 & 85,2 & - \\ \hline
+		\end{tabular}
+	\end{center}
+	\caption{Valores respecto a \textit{throughput} (Mbps) obtenidos en expertimentos de campo utilizando el protocolo NV2}
+	\label{table:pruebasNV2campo}
+\end{table}
+
+\begin{table}[H]
+	\begin{center}
+		\begin{tabular}{|l|l|l|}
+			\hline
+			 Emplazamiento (A - B)  & Lfs (dBm) & Prx (dBm)\\ \hline
+            Cabo Pantoja - Torre Causana & 142,9 & -53,9 \\ \hline 
+		   Torre Causana - Tempestad & 141,3 & -52,3 \\ \hline
+		   Tempestad - Tupac Amaru & 139,1 & -50,1 \\ \hline
+		   Tupac Amaru - Angoteros & 142,1 & -53,1 \\ \hline
+		   Angoteros - Campo Serio & 146 & -57 \\ \hline
+		   Campo Serio - Rumi Tumi & 146,6 & -57,6 \\ \hline
+		   Rumi Tumi - San Rafael & 156,8 & -67,8 \\ \hline
+		   San Rafael - Copal Urco & 146,2 & -57,2 \\ \hline
+		   Copal Urco - Santa Clotilde & 139,6 & -50,6 \\ \hline
+		   Santa Clotilde - Tacsha Curaray & 162,7 & -73,7 \\ \hline
+		   Tacsha Curaray - Negro Urco & 156,6 & -67,6 \\ \hline
+		   Negro Urco - Tuta Pishco & 153,3 & -64,3 \\ \hline
+		   Tuta Pishco - Huamán Urco & 141,9 & -52,9 \\ \hline
+		   Huamán Urco - Mazán & 151,1 & -62,1 \\ \hline
+		   Mazán - Hospital Regional de Loreto & 137,8 & -48,8 \\ \hline
+		\end{tabular}
+	\end{center}
+	\caption{Valores obtenidos mediante simulación con RadioMobile}
+	\label{table:rmEnlaceteorico}
+\end{table}
+
 \section{Código utilizado}
 El siguiente código es el utilizado para la representación de \textit{throughput} en función de la distancia  y MCS, guardado en el archivo \texttt{capacidades.py}:
 \begin{lstlisting}[caption={Script utilizado para representar \textit{throughput} en función de la distancia.}\label{lst:script},captionpos=b][language=Python]
